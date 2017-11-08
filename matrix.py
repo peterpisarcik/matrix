@@ -1,10 +1,12 @@
 class Matrix:
     def __init__(self, array):
-        """ Vytvoreni matice """
+        # Get matrix access to object
         self.array = array
 
-        if len(array[0]) != len(array[1]):
-            raise ValueError("Matrices are not equal")
+        # Check if rows have same width
+        for i in range(0, len(array)):
+            if len(array[0]) != len(array[i]):
+                raise ValueError("Rows are not equal")
 
     @staticmethod
     def zero_matrix(height, width):
@@ -53,7 +55,7 @@ class Matrix:
         :parameter tup -- Tup is a position of element in matrix
         :parameter new_value -- new_value is value to set new value of element in matrix
         """
-        
+
         array = self.array
         array[tup[0]][tup[1]] = new_value
         return array
@@ -113,6 +115,7 @@ class Matrix:
         Overloading operator ==
 
         :parameter other_matrix -- Other matrix for overloading == operator
+        :return boolean
         """
         if self.array == other_matrix:
             return True
@@ -124,6 +127,7 @@ class Matrix:
         Overloading operator !=
 
         :parameter other_matrix -- Other matrix for overloading != operator
+        :return boolean
         """
 
         if self.array != other_matrix:
@@ -132,21 +136,48 @@ class Matrix:
             return False
 
     def __add__(self, other_matrix):
-        """ Pretizeni operatoru + na scitani matic """
-        first_matrix = self.array
-        second_matrix = other_matrix
-        print(second_matrix)
-        #  if len(first_matrix) != len(second_matrix):
-        #     raise ValueError("Matrices have not same size")
+        """
+        Overloading operator +
 
-        # for i in range(len(first_matrix[0])):
-        #  for j in range(len(first_matrix)):
-        #      c = first_matrix[i][j] + second_matrix[i][j]
-        # print(c)
+        :parameter other_matrix -- Other matrix for overloading + operator
+        :return Matrix -- Return sum of two matrices
+        """
+        first_matrix = self.array
+        second_matrix = other_matrix.array
+
+        if len(first_matrix) != len(second_matrix):
+            raise ValueError("Matrices have not same size")
+
+        w, h = len(first_matrix), len(first_matrix[0])
+        result = [[0 for x in range(h)] for y in range(w)]
+
+        for i in range(len(first_matrix[0])):
+            for j in range(len(first_matrix)):
+                result[j][i] = first_matrix[j][i] + second_matrix[j][i]
+
+        return Matrix(result)
 
     def __sub__(self, other_matrix):
-        """ Pretizeni operatoru - na odecitani matic """
-        pass
+        """
+       Overloading operator -
+
+       :parameter other_matrix -- Other matrix for overloading - operator
+       :return Matrix -- Return subtraction of two matrices
+       """
+        first_matrix = self.array
+        second_matrix = other_matrix.array
+
+        if len(first_matrix) != len(second_matrix):
+            raise ValueError("Matrices have not same size")
+
+        w, h = len(first_matrix), len(first_matrix[0])
+        result = [[0 for x in range(h)] for y in range(w)]
+
+        for i in range(len(first_matrix[0])):
+            for j in range(len(first_matrix)):
+                result[j][i] = first_matrix[j][i] - second_matrix[j][i]
+
+        return Matrix(result)
 
     def __mul__(self, other_matrix):
         """ Pretizeni operatoru * na nasobeni matic """
@@ -157,9 +188,13 @@ class Matrix:
         pass
 
 
-M = Matrix([[1, 2, 3], [4, 5, 6]])
-A = Matrix([[1, 2, 3], [2, 5, 6]])
-M + A
+M = Matrix([[1, 2, 3], [4, 5, 2]])
+A = Matrix([[5, 2, 3], [2, 1, 2]])
+
+C = M - A
+
+print(C)
+
 
 
 # Z = Matrix.zero_matrix(3, 2)

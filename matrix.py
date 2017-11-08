@@ -10,15 +10,21 @@ class Matrix:
 
     @staticmethod
     def zero_matrix(height, width):
-        """ Staticka metoda na vytovreni nulove matice """
-        result = ""
-        iterator = 1
-        for x in range(height * width):
-            result = result + str(0)
-            if iterator % width == 0:
-                result = result + "\n"
-            iterator += 1
-        return result
+        """
+        Create whole matrix with zeros
+
+        :parameter height
+        :parameter width
+        :return Matrix
+        """
+
+        result = [[0 for x in range(width)] for y in range(height)]
+
+        for x in range(width):
+            for y in range(height):
+                result[y][x] = 0
+
+        return Matrix(result)
 
     @staticmethod
     def unit_matrix(side):
@@ -191,9 +197,9 @@ class Matrix:
 M = Matrix([[1, 2, 3], [4, 5, 2]])
 A = Matrix([[5, 2, 3], [2, 1, 2]])
 
-C = M - A
+Z = Matrix.zero_matrix(3, 3)
 
-print(C)
+print(Z)
 
 
 

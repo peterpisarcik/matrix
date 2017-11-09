@@ -17,7 +17,6 @@ class Matrix:
         :parameter width
         :return Matrix
         """
-
         result = [[0 for x in range(width)] for y in range(height)]
 
         for x in range(width):
@@ -34,29 +33,29 @@ class Matrix:
         :parameter side
         :return Matrix
         """
-        result = ""
-        iterator = 1
+        result = [[0 for x in range(side)] for y in range(side)]
+
         for x in range(side):
             for y in range(side):
                 if x == y:
-                    result = result + str(1)
+                    result[x][y] = 1
                 else:
-                    result = result + str(0)
-                    if iterator % side == 0:
-                        result = result + "\n"
-                iterator += 1
+                    result[x][y] = 0
 
-        return result
+        return Matrix(result)
 
     def __str__(self):
+
         iterator = 0
         result = ""
+
         for i in self.array:
             for a in i:
                 iterator += 1
                 result = result + " " + str(a)
                 if iterator % len(self.array[0]) == 0:
                     result = result + "\n"
+
         return result
 
     def __setitem__(self, tup, new_value):
@@ -69,6 +68,7 @@ class Matrix:
 
         array = self.array
         array[tup[0]][tup[1]] = new_value
+
         return array
 
     def __getitem__(self, tup):
@@ -77,7 +77,6 @@ class Matrix:
 
         :parameter tup
         """
-
         x, y = tup
         print(self.array[x][y])
 
@@ -97,7 +96,9 @@ class Matrix:
         """
         array = self.array
         w, h = len(array), len(array[0])
+
         transposition = [[0 for x in range(w)] for y in range(h)]
+
         for i in range(len(array[0])):
             for j in range(len(array)):
                 transposition[i][j] = array[j][i]
@@ -105,7 +106,7 @@ class Matrix:
         return Matrix(transposition)
 
     def is_square(self):
-        # This method check whether is matrix square or not
+        # This method check whether is matrix square or not.
         array = self.array
 
         if len(array) == len(array[0]):
@@ -115,7 +116,9 @@ class Matrix:
 
     def is_symmetric(self):
         """ This method prints whether matrix is symmetric or not and returns true or false """
+
         matrix = Matrix(self.array)
+
         if len(self.array) == len(self.array[0]) and matrix == matrix.transposition():
             print("Matrix is symmetric")
             return True
@@ -208,9 +211,9 @@ class Matrix:
         w, h = len(second_matrix[0]), len(first_matrix)
         result = [[0 for x in range(w)] for y in range(h)]
 
-        for i in range(len(first_matrix[0])):
-            for j in range(len(first_matrix)):
-                result[j][i] = first_matrix[j][i] * second_matrix[j][i]
+        for i in range(len(first_matrix)):
+            for j in range(len(first_matrix[0])):
+                result[i][j] = first_matrix[i][j] * second_matrix[j][i]
 
         return Matrix(result)
 
@@ -235,10 +238,10 @@ class Matrix:
 
 M = Matrix([[1, 2, 3], [4, 5, 6]])
 A = Matrix([[-1, 3, -3, 1], [2, 0, 0, 5], [1, 5, 7, -10]])
-B = Matrix([[6, 20, 1], [2, 8, -7], [10, -1, 6]])
-Z = 7 * B
 
-print(Z)
+C = M * A
+print(C)
+
 
 
 

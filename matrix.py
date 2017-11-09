@@ -28,7 +28,12 @@ class Matrix:
 
     @staticmethod
     def unit_matrix(side):
-        """ Staticka metoda na vytvoreni jednotkove matice """
+        """
+        Static method to create matrix with zeroes and ones
+
+        :parameter side
+        :return Matrix
+        """
         result = ""
         iterator = 1
         for x in range(side):
@@ -81,13 +86,15 @@ class Matrix:
         print(len(self.array[0]))
 
     def get_height(self):
-        """
-        Print height of matrix.
-        """
+        """ Print height of matrix.  """
         print(len(self.array))
 
     def transposition(self):
-        """ Vrati novou matici, ktera je transpozici puvodni matice """
+        """
+        Return transpose of matrix
+
+        :return Matrix
+        """
         array = self.array
         w, h = len(array), len(array[0])
         transposition = [[0 for x in range(w)] for y in range(h)]
@@ -186,20 +193,53 @@ class Matrix:
         return Matrix(result)
 
     def __mul__(self, other_matrix):
-        """ Pretizeni operatoru * na nasobeni matic """
-        pass
+        """
+       Overloading operator *
+
+       :parameter other_matrix -- Other matrix for overloading * operator
+       :return Matrix -- Return subtraction of two matrices
+       """
+        first_matrix = self.array
+        second_matrix = other_matrix.array
+
+        if len(first_matrix[0]) != len(second_matrix):
+            raise ValueError("Rows of first matrix must be equal to second matrix columns")
+
+        w, h = len(second_matrix[0]), len(first_matrix)
+        result = [[0 for x in range(w)] for y in range(h)]
+
+        for i in range(len(first_matrix[0])):
+            for j in range(len(first_matrix)):
+                result[j][i] = first_matrix[j][i] * second_matrix[j][i]
+
+        return Matrix(result)
 
     def __rmul__(self, constant):
-        """ Pretizeni operatoru * na nasobeni matice konstantou """
-        pass
+        """
+        Overloading operator * by constant
+
+        :parameter constant
+        :return Matrix
+        """
+        first_matrix = self.array
+
+        w, h = len(first_matrix), len(first_matrix[0])
+        result = [[0 for x in range(h)] for y in range(w)]
+
+        for i in range(len(first_matrix[0])):
+            for j in range(len(first_matrix)):
+                result[j][i] = constant * first_matrix[j][i]
+
+        return Matrix(result)
 
 
-M = Matrix([[1, 2, 3], [4, 5, 2]])
-A = Matrix([[5, 2, 3], [2, 1, 2]])
-
-Z = Matrix.zero_matrix(3, 3)
+M = Matrix([[1, 2, 3], [4, 5, 6]])
+A = Matrix([[-1, 3, -3, 1], [2, 0, 0, 5], [1, 5, 7, -10]])
+B = Matrix([[6, 20, 1], [2, 8, -7], [10, -1, 6]])
+Z = 7 * B
 
 print(Z)
+
 
 
 

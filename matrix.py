@@ -65,7 +65,6 @@ class Matrix:
         :parameter tup -- Tup is a position of element in matrix
         :parameter new_value -- new_value is value to set new value of element in matrix
         """
-
         array = self.array
         array[tup[0]][tup[1]] = new_value
 
@@ -212,8 +211,9 @@ class Matrix:
         result = [[0 for x in range(w)] for y in range(h)]
 
         for i in range(len(first_matrix)):
-            for j in range(len(first_matrix[0])):
-                result[i][j] = first_matrix[i][j] * second_matrix[j][i]
+            for j in range(len(second_matrix[0])):
+                for k in range(len(second_matrix)):
+                    result[i][j] += first_matrix[i][k] * second_matrix[k][j]
 
         return Matrix(result)
 
@@ -234,18 +234,3 @@ class Matrix:
                 result[j][i] = constant * first_matrix[j][i]
 
         return Matrix(result)
-
-
-M = Matrix([[1, 2, 3], [4, 5, 6]])
-A = Matrix([[-1, 3, -3, 1], [2, 0, 0, 5], [1, 5, 7, -10]])
-
-C = M * A
-print(C)
-
-
-
-
-
-# Z = Matrix.zero_matrix(3, 2)
-# print(M)
-# print(Z)

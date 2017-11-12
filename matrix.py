@@ -11,11 +11,11 @@ class Matrix:
     @staticmethod
     def zero_matrix(height, width):
         """
-        Create whole matrix with zeros
+        Create whole matrix with zeros.
 
-        :parameter height
-        :parameter width
-        :return Matrix
+        Keyword arguments:
+            height
+            width
         """
         result = [[0 for x in range(width)] for y in range(height)]
 
@@ -30,8 +30,8 @@ class Matrix:
         """
         Static method to create matrix with zeroes and ones
 
-        :parameter side
-        :return Matrix
+        Keyword arguments:
+            side -- Count of columns and rows
         """
         result = [[0 for x in range(side)] for y in range(side)]
 
@@ -62,8 +62,9 @@ class Matrix:
         """
         Overloading __setitem__ to set new value of element in matrix
 
-        :parameter tup -- Tup is a position of element in matrix
-        :parameter new_value -- new_value is value to set new value of element in matrix
+        Keyword arguments:
+            tup -- tup is a position of element in matrix
+            new_value -- new_value is value to set new value of element in matrix
         """
         array = self.array
         array[tup[0]][tup[1]] = new_value
@@ -74,13 +75,14 @@ class Matrix:
         """
         Overloading __getitem__ to get element of matrix
 
-        :parameter tup
+        Keyword arguments:
+            tup
         """
         x, y = tup
         print(self.array[x][y])
 
     def get_width(self):
-        """ Print width of matrix """
+        """ Print width of matrix. """
         print(len(self.array[0]))
 
     def get_height(self):
@@ -88,11 +90,7 @@ class Matrix:
         print(len(self.array))
 
     def transposition(self):
-        """
-        Return transpose of matrix
-
-        :return Matrix
-        """
+        """ Return transpose of matrix."""
         array = self.array
         w, h = len(array), len(array[0])
 
@@ -115,7 +113,6 @@ class Matrix:
 
     def is_symmetric(self):
         """ This method prints whether matrix is symmetric or not and returns true or false """
-
         matrix = Matrix(self.array)
 
         if len(self.array) == len(self.array[0]) and matrix == matrix.transposition():
@@ -127,10 +124,10 @@ class Matrix:
 
     def __eq__(self, other_matrix):
         """
-        Overloading operator ==
+        Overloading operator ==.
 
-        :parameter other_matrix -- Other matrix for overloading == operator
-        :return boolean
+        Keyword arguments:
+            other_matrix -- Other matrix for overloading == operator
         """
         if self.array == other_matrix:
             return True
@@ -139,12 +136,11 @@ class Matrix:
 
     def __ne__(self, other_matrix):
         """
-        Overloading operator !=
+        Overloading operator !=.
 
-        :parameter other_matrix -- Other matrix for overloading != operator
-        :return boolean
+        Keyword arguments:
+            other_matrix -- Other matrix for overloading != operator
         """
-
         if self.array != other_matrix:
             return True
         else:
@@ -152,10 +148,10 @@ class Matrix:
 
     def __add__(self, other_matrix):
         """
-        Overloading operator +
+        Overloading operator +.
 
-        :parameter other_matrix -- Other matrix for overloading + operator
-        :return Matrix -- Return sum of two matrices
+        Keyword arguments:
+            other_matrix -- Other matrix for overloading + operator
         """
         first_matrix = self.array
         second_matrix = other_matrix.array
@@ -174,10 +170,10 @@ class Matrix:
 
     def __sub__(self, other_matrix):
         """
-       Overloading operator -
+       Overloading operator -.
 
-       :parameter other_matrix -- Other matrix for overloading - operator
-       :return Matrix -- Return subtraction of two matrices
+        Keyword arguments:
+            other_matrix -- Other matrix for overloading - operator
        """
         first_matrix = self.array
         second_matrix = other_matrix.array
@@ -196,10 +192,10 @@ class Matrix:
 
     def __mul__(self, other_matrix):
         """
-       Overloading operator *
+        Overloading operator *.
 
-       :parameter other_matrix -- Other matrix for overloading * operator
-       :return Matrix -- Return subtraction of two matrices
+        Keyword arguments:
+            other_matrix -- Other matrix for overloading * operator
        """
         first_matrix = self.array
         second_matrix = other_matrix.array
@@ -219,10 +215,10 @@ class Matrix:
 
     def __rmul__(self, constant):
         """
-        Overloading operator * by constant
+        Overloading operator * by constant.
 
-        :parameter constant
-        :return Matrix
+        Keyword arguments:
+            constant -- constant of number
         """
         first_matrix = self.array
 
